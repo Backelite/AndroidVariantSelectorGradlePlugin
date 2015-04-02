@@ -1,5 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
 repositories {
     mavenCentral()
@@ -10,8 +11,8 @@ dependencies {
     compile localGroovy()
 }
 
-
-group = 'com.backelite.android.variantSelector'
+group = 'com.backelite'
+archivesBaseName = "android-variantSelector-gradle-plugin"
 version = '1.0-SNAPSHOT'
 
 install {
@@ -20,16 +21,64 @@ install {
     }
 }
 
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
 uploadArchives {
     repositories.mavenDeployer {
-        repository(url: releasesRepoUrl) {
-            authentication(userName: releasesRepoUsername, password: releasesRepoPassword)
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+        repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            authentication(userName: ossrhUsername, password: ossrhPassword)
         }
 
-        snapshotRepository(url: snapshotsRepoUrl) {
-            authentication(userName: snapshotsRepoUsername, password: snapshotsRepoPassword)
+        snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+            authentication(userName: ossrhUsername, password: ossrhPassword)
         }
 
-        pom.artifactId = 'gradle-plugin'
+        pom.project {
+            name 'AndroidVariantSelector Gradle Plugin'
+            packaging 'jar'
+            artifactId = 'android-variantSelector-gradle-plugin'
+
+            description 'A plugin for Gradle that aims to simplify dynamic build of android variants.'
+            url 'https://github.com/Backelite/AndroidVariantSelectorGradlePlugin'
+
+            scm {
+                connection 'scm:git@github.com:Backelite/AndroidVariantSelectorGradlePlugin.git'
+                developerConnection 'scm:git@github.com:Backelite/AndroidVariantSelectorGradlePlugin.git'
+                url 'https://github.com/Backelite/AndroidVariantSelectorGradlePlugin.git'
+            }
+
+            licenses {
+                license {
+                    name 'MIT License, Version 2.0'
+                    url 'https://github.com/Backelite/AndroidVariantSelectorGradlePlugin/blob/master/LICENSE.txt'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'JulienArzul'
+                    name 'Julien Arzul'
+                    email 'julien.arzul@gmail.com'
+                }
+            }
+        }
     }
 }
