@@ -28,7 +28,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.backelite.android.variantSelector:gradle-plugin:1.0-SNAPSHOT'
+    classpath 'com.backelite:android-variantSelector-gradle-plugin:1.0'
   }
 }
 
@@ -36,7 +36,7 @@ apply plugin: 'com.backelite.android.variantSelector'
 
 androidVariantSelector {
   moveOutputEnabled true
-  outputDirectoryPath "appstoreDelivery"
+  outputDirectoryPath "myDeliveryFolder"
   renameOutputEnabled false
 }
 ```
