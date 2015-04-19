@@ -73,10 +73,12 @@ To do this, you need to :
 1. Configure the job to retrieve your project via your favorite version control system  
 
 2. Add two choice parameters to the job :  
-![alt text](./readmeResources/jenkins_choice_parameters.png "Jenkins Choice Parameters")  
+![Jenkins Choice Parameters](https://github.com/Backelite/AndroidVariantSelectorGradlePlugin/raw/master/readmeResources/jenkins_choice_parameters.png "Jenkins Choice Parameters")  
 
 3. Add a gradle build step that uses the assembleVariant task  
-![alt text](./readmeResources/jenkins_gradle_step.png "Jenkins Gradle Task")
+![Jenkins Gradle Task](https://github.com/Backelite/AndroidVariantSelectorGradlePlugin/raw/master/readmeResources/jenkins_gradle_step.png "Jenkins Gradle Task")
+
+4. That's it, you can now start your build and choose the parameters
 
 
 ## Contributing
