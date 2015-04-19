@@ -66,6 +66,19 @@ This variable is used only if moveOutputEnabled is true.
 It specifies the directory in which we will copy the final apk. The path is relative to the project build directory.
 
 
+## Example with Jenkins
+The plugin can easily be used with Jenkins to allow non-technical users to build your application, with the right build type and flavor.  
+To do this, you need to :
+
+1. Configure the job to retrieve your project via your favorite version control system  
+
+2. Add two choice parameters to the job :  
+![alt text](./readmeResources/jenkins_choice_parameters.png "Jenkins Choice Parameters")  
+
+3. Add a gradle build step that uses the assembleVariant task  
+![alt text](./readmeResources/jenkins_gradle_step.png "Jenkins Gradle Task")
+
+
 ## Contributing
 Contributions for bug fixing or improvements are welcomed. Feel free to submit a pull request.
 
