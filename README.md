@@ -78,6 +78,8 @@ To do this, you need to :
 3. Add a gradle build step that uses the assembleVariant task  
 ![Jenkins Gradle Task](https://github.com/Backelite/AndroidVariantSelectorGradlePlugin/raw/master/readmeResources/jenkins_gradle_step.png "Jenkins Gradle Task")
 
+4. That's it, you can now start your build and choose the parameters
+
 
 ## Contributing
 Contributions for bug fixing or improvements are welcomed. Feel free to submit a pull request.
